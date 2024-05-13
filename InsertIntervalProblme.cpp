@@ -1,3 +1,12 @@
+// Insert in sorted and non-overlapping interval array
+// Last Updated : 18 Mar, 2024
+// Given a set of non-overlapping intervals and a new interval, insert the interval at correct position. If the insertion results in overlapping intervals, then merge the overlapping intervals. Assume that the set of non-overlapping intervals is sorted on the basis of start time, to find the correct position of insertion.
+// Input: Set : [1, 3], [6, 9]
+// New Interval : [2, 5]
+// Output: [1, 5], [6, 9]
+// Explanation: The correct position to insert a new interval [2, 5] is between the two given intervals.
+// The resulting set would have been [1, 3], [2, 5], [6, 9], but the intervals [1, 3], [2, 5] are overlapping. So, they are merged in one interval [1, 5].
+
 #include<bits/stdc++.h>
 using namespace std; 
 
@@ -76,11 +85,11 @@ int main(){
     newInterval.start = 3;
     newInterval.end = 5;
     Intervals.push_back(newInterval);
-    newInterval.start = 6;
-    newInterval.end = 7;
-    Intervals.push_back(newInterval);
     newInterval.start = 8;
     newInterval.end = 10;
+    Intervals.push_back(newInterval);
+    newInterval.start = 6;
+    newInterval.end = 7;
     Intervals.push_back(newInterval);
     newInterval.start = 14;
     newInterval.end = 16;
