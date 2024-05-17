@@ -23,11 +23,29 @@ vector<Interval> mergedIntervals (vector<Interval> intervals){
     }
     for (int i = 0; i < intervals.size(); i++) {
         bool overlap = DoesOverlap(intervals[i],intervals[i+1]);
+        int size = resultInterval.size();
         if(overlap){
-            Interval temp;
-            temp.start = min(intervals[i].start,intervals[i+1].start);
-            temp.end =  max(intervals[i].end,intervals[i+1].end);
-            resultInterval.push_back(temp);
+            if(i==0){
+                Interval temp;
+                temp.start = min(intervals[i].start,intervals[i+1].start);
+                temp.end =  max(intervals[i].end,intervals[i+1].end);
+                resultInterval.push_back(temp);
+                i++;
+            }else{
+                bool DoesResultOverlap = DoesOverlap(intervals[i],resultInterval[size-1]);
+                if(DoesResultOverlap){
+                    resultInterval[size-1].end =  max(intervals[i].end,resultInterval[size-1].end);
+                }else{
+                    Interval temp;
+                    temp.start = intervals[i].start;
+                    temp.end = intervals[i].end;
+                    resultInterval.push_back(temp);
+                }
+                
+            }
+        }
+        else if (i != 0 && resultInterval[size-1].start <= intervals[i].start && resultInterval[size-1].end >= intervals[i].end){
+            //do nothing
         }
         else{
             resultInterval.push_back(intervals[i]);
@@ -59,6 +77,9 @@ int main(){
     Intervals.push_back(newInterval);
     newInterval.start = 14;
     newInterval.end = 16;
+    Intervals.push_back(newInterval);
+    newInterval.start = 13;
+    newInterval.end = 17;
     Intervals.push_back(newInterval);
     
     
